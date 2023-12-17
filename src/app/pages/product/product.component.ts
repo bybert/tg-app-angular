@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [],
   template: `
     <div class="centered">
       <h2 class="mb">{{ product.title }}</h2>
@@ -27,23 +26,21 @@ export class ProductComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    const id = this.route.snapshot.paramMap.get('id')
-    this.product = this.products.getById(id)
-    this.goBack = this.goBack.bind(this)
+    const id = this.route.snapshot.paramMap.get('id');
+    this.product = this.products.getById(id);
+    this.goBack = this.goBack.bind(this);
   }
 
   goBack() {
-    this.router.navigate(['/'])
+    this.router.navigate(['']);
   }
 
   ngOnInit(): void {
-    this.telegram.BackButton.show()
-    this.telegram.BackButton.onClick(this.goBack)
+    this.telegram.BackButton.show();
+    this.telegram.BackButton.onClick(this.goBack);
   }
 
   ngOnDestroy(): void {
-    this.telegram.BackButton.show()
-    this.telegram.BackButton.onClick(this.goBack)
+    this.telegram.BackButton.offClick(this.goBack);
   }
-
 }
