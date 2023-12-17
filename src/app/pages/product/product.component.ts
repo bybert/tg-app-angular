@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     <div class="centered">
       <h2 class="mb">{{ product.title }}</h2>
       <br />
-      <img [src]="product.image" alt="product.title" />
+      <img [src]="product.image" [alt]="product.title" />
       <p>{{ product.text }}</p>
       <p>{{ product.time }}</p>
       <a [href]="product.link" target="_blank">Посмотреть курс</a>
@@ -36,11 +36,14 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.router.navigate(['/'])
   }
 
+  ngOnInit(): void {
+    this.telegram.BackButton.show()
+    this.telegram.BackButton.onClick(this.goBack)
+  }
+
   ngOnDestroy(): void {
     this.telegram.BackButton.show()
     this.telegram.BackButton.onClick(this.goBack)
   }
-  ngOnInit(): void {
-    this.telegram.BackButton.offClick(this.goBack)
-  }
+
 }
